@@ -1,0 +1,23 @@
+{
+  "name": "employee-manager",
+  "version": "1.0.0",
+  "description": "manage your employees through the command line!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mstephen19/employee-manager.git"
+  },
+  "author": "Matt Stephens",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mstephen19/employee-manager/issues"
+  },
+  "homepage": "https://github.com/mstephen19/employee-manager#readme",
+  "dependencies": {
+    "inquirer": "^8.2.0",
+    "mysql2": "^2.3.2"
+  }
+}
