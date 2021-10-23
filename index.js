@@ -1,5 +1,5 @@
 const inquirer = require('inquirer');
-const mysql = require('mysql2');
+const q = require('./lib/dbLogic');
 
 const menuQ = [
   {
@@ -21,44 +21,23 @@ const menuQ = [
 ];
 
 function handleResponse(response){
-  switch(response){
-    case 'View all departments':
-
-      init()
-      break;
-    case 'View all roles':
-
-      init()
-      break;
-    case 'View all employees':
-
-      init()
-      break;
-    case 'Add a department':
-
-      init()
-      break;
-    case 'Add a role':
-
-      init()
-      break;
-    case 'Add an employee':
-
-      init()
-      break;
-    case 'Update an employee role':
-      init()
-      break;
-    default:
-      //exit
+  if (response.includes('View')){
+    q.view(response);
+    init();
+  } else if (response.includes('Add')){
+    q.add(response);
+    init();
+  } else {
+    q.update(response);
+    init();
   }
 }
 
 function init() {
   console.log(`
-  *******************************
-  ********** MAIN MENU **********
-  *******************************\n`)
+  **************************************
+  ********** Employee Manager **********
+  **************************************\n`)
   inquirer.prompt(menuQ)
     .then(answer => handleResponse(answer.menu));
 }
