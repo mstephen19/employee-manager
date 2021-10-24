@@ -75,7 +75,7 @@ const addEmployee = [
   },
   {
     name: 'manager_name',
-    message: 'What is their manager\'s first name?',
+    message: 'What is their manager\'s first AND last name?',
     required: 'true'
   }
 ]
@@ -112,7 +112,9 @@ function handleResponse(response){
         // Send the menu option + the prompt data to the add() function
           .then(res => {
             // Setting the manager option to a boolean value which will be used in add() function
-            res.manager === 'Yes' ? res.manager = true : res.manager = false;
+            if (res.manager){
+              res.manager === 'Yes' ? res.manager = true : res.manager = false;
+            }
             q.add(response, res)
           })
           .then(x => {
