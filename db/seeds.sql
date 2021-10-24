@@ -5,14 +5,14 @@ VALUES
   ("Development"),
   ("Marketing");
 
-INSERT INTO roles (role, salary, department_id)
+INSERT INTO roles (role, salary, department_id, manager)
 VALUES
-  ("Development Manager", 120000, 1),
-  ("Front End Engineer", 60000, 1),
-  ("Back End Engineer", 80000, 1),
-  ("UI UX Designer", 75000, 1),
-  ("Marketing Manager", 75000, 2),
-  ("Marketing Slave", 20, 2);
+  ("Development Manager", 120000, 1, true),
+  ("Front End Engineer", 60000, 1, false),
+  ("Back End Engineer", 80000, 1, false),
+  ("UI UX Designer", 75000, 1, false),
+  ("Marketing Manager", 75000, 2, true),
+  ("Marketing Slave", 20, 2, false);
 
 INSERT INTO employees (first_name, last_name, role_id)
 VALUES
