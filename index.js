@@ -4,6 +4,7 @@ const q = require('./lib/dbLogic');
 const cTable = require('console.table');
 // Easily create a fancy title in console. Small helper function
 const titles = require('./lib/titles');
+const { update } = require('./lib/dbLogic');
 
 const menuQ = [
   {
@@ -80,6 +81,27 @@ const addEmployee = [
   }
 ]
 
+let updateEmployee = [
+  {
+    name: 'employee_name',
+    type: 'list',
+    choices: null,
+    message: 'Which employee do you want to update?',
+    required: 'true'
+  },
+  {
+    name: 'new_role',
+    message: 'What is the name of the new role you want to assign them?',
+    required: 'true'
+  }
+]
+
+async function findEmployees(){
+  const employees = await q.employeeNameArray();
+  updateEmployee[0].choices = employees;
+  return;
+}
+
 function handleResponse(response){
   switch(true){
     // For "View"
@@ -87,6 +109,7 @@ function handleResponse(response){
       // Run the view() function
       q.view(response)
         .then(info => {
+          console.log(titles(`Showing all ${response.split(' ')[2]}`))
           console.table(info)
           init();
         })
@@ -125,9 +148,15 @@ function handleResponse(response){
       break;
     // For "Update"
     case response.includes('Update'):
-      //Same here
-      q.update(response);
-      init();
+      findEmployees()
+        .then(x => inquirer.prompt(updateEmployee))
+        .then(res => q.update(res))
+        .then(x => {
+          console.log(titles(`Successfully Updated!`))
+          init()
+        })
+      // q.update(response);
+      // init();
       break;
     default:
       process.exit();
