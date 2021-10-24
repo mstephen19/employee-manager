@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+// Logic for database
 const q = require('./lib/dbLogic');
 // Better console.table()
 const cTable = require('console.table');
@@ -113,7 +114,7 @@ function handleResponse(response){
           console.table(info)
           init();
         })
-        .catch(err => console.error(err));
+        .catch(err => console.log(new Error(err)));
       break;
     // For "Add"
     case response.includes('Add'):
@@ -144,10 +145,11 @@ function handleResponse(response){
             console.log(titles(`${response.split(' ')[2].charAt(0).toUpperCase() + response.split(' ')[2].slice(1)} Added!`))
             init()
           })
-          .catch(err=>console.error(err));
+          .catch(err=>console.log(new Error(err)));
       break;
     // For "Update"
     case response.includes('Update'):
+      // Set the employee options in the prompt to be our employees
       findEmployees()
         .then(x => inquirer.prompt(updateEmployee))
         .then(res => q.update(res))
@@ -155,8 +157,7 @@ function handleResponse(response){
           console.log(titles(`Successfully Updated!`))
           init()
         })
-      // q.update(response);
-      // init();
+        .catch(err=>console.log(new Error(err)))
       break;
     default:
       process.exit();
