@@ -3,7 +3,8 @@ USE company_db;
 INSERT INTO departments (department)
 VALUES
   ("Development"),
-  ("Marketing");
+  ("Marketing"),
+  ("Lawsuits");
 
 INSERT INTO roles (role, salary, department_id, manager)
 VALUES
@@ -12,7 +13,8 @@ VALUES
   ("Back End Engineer", 80000, 1, false),
   ("UI UX Designer", 75000, 1, false),
   ("Marketing Manager", 75000, 2, true),
-  ("Marketing Slave", 20, 2, false);
+  ("Marketing Slave", 20, 2, false),
+  ("Lawyer Manager", 999999, 3, true);
 
 INSERT INTO employees (first_name, last_name, role_id, manager_id)
 VALUES
@@ -22,4 +24,5 @@ VALUES
   ("Mark", "Wilkinson", 3, 1),
   ("Billy", "Addams", 4, 1),
   ("Jamie", "Lamie", 5, null),
-  ("Oscar", "Grouch", 6, 6);
+  ("Oscar", "Grouch", 6, 6),
+  ("Biggie", "Lawboy", 7, null)
