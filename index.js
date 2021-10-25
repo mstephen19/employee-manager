@@ -3,9 +3,8 @@ const inquirer = require('inquirer');
 const q = require('./lib/dbLogic');
 // Better console.table()
 const cTable = require('console.table');
-// Easily create a fancy title in console. Small helper function
-const titles = require('./lib/titles');
-const { update } = require('./lib/dbLogic');
+// Easily create a fancy title in console. Small helper function (not copied! lol)
+const titles = require('./helpers/titles');
 
 const menuQ = [
   {
@@ -103,6 +102,11 @@ async function findEmployees(){
   return;
 }
 
+const handleError = (error)=>{
+  console.error(error);
+  init();
+}
+
 function handleResponse(response){
   switch(true){
     // For "View"
@@ -114,7 +118,7 @@ function handleResponse(response){
           console.table(info)
           init();
         })
-        .catch(err => console.log(new Error(err)));
+        .catch(err => handleError(err));
       break;
     // For "Add"
     case response.includes('Add'):
@@ -145,7 +149,7 @@ function handleResponse(response){
             console.log(titles(`${response.split(' ')[2].charAt(0).toUpperCase() + response.split(' ')[2].slice(1)} Added!`))
             init()
           })
-          .catch(err=>console.log(new Error(err)));
+          .catch(err=>handleError(err));
       break;
     // For "Update"
     case response.includes('Update'):
@@ -157,7 +161,7 @@ function handleResponse(response){
           console.log(titles(`Successfully Updated!`))
           init()
         })
-        .catch(err=>console.log(new Error(err)))
+        .catch(err=>handleError(err))
       break;
     default:
       process.exit();
